@@ -7,7 +7,7 @@ systemctl enable mariadb
 yum install -y amazon-linux-extras
 amazon-linux-extras enable php7.4
 yum clean metadata
-yum install httpd php php-mysql php-gd mariadb-server php-xml php-intl mysql -y
+yum install php -y
 mysql_secure_installation <<EOF
 
 y
