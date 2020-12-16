@@ -1,6 +1,4 @@
-#!/bin/bash -xe
-sudo su -
-script logfile1
+#!/bin/bash
 yum install httpd php php-mysql php-gd php-xml mariadb-server mariadb php-mbstring -y
 systemctl restart httpd.service
 systemctl enable httpd.service
@@ -29,7 +27,7 @@ EOF
 wget https://releases.wikimedia.org/mediawiki/1.35/mediawiki-1.35.0.tar.gz
 wget https://releases.wikimedia.org/mediawiki/1.35/mediawiki-1.35.0.tar.gz.sig
 gpg --verify mediawiki-1.35.0.tar.gz.sig mediawiki-1.35.0.tar.gz
-tar -zxf /home/ec2-user/mediawiki-1.35.0.tar.gz -C /var/www/html/
+tar -zxf mediawiki-1.35.0.tar.gz -C /var/www/html/
 mv /var/www/html/mediawiki-1.35.0 /var/www/html/mediawiki
 chown -R apache:apache /var/www/html/mediawiki 
 service httpd restart
