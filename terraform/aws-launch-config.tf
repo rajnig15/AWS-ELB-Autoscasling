@@ -8,7 +8,20 @@ resource "aws_launch_configuration" "web-mediawiki" {
   security_groups = [ aws_security_group.web-sg.id ]
   associate_public_ip_address = true
 
-  user_data = "${file("script1.sh")}"
+  # user_data = file("./script1.sh")
+
+	user_data = <<EOF
+		#! /bin/bash
+                yum install -y git
+                mkdir projects
+                cd projects
+                git init
+                git clone https://github.com/rajnig15/AWS-ELB-Autoscasling.git
+                cd AWS-ELB-Autoscasling/terraform
+                chmod +x script1.sh
+                ./script1.sh
+		
+	EOF
 
   lifecycle {
           create_before_destroy = true
@@ -56,7 +69,7 @@ resource "aws_elb" "elb-mediawiki" {
     unhealthy_threshold = 2
     timeout = 3
     interval = 30
-    target = "HTTP:80/"
+    target = "TCP:80"
   }
 
   listener {
