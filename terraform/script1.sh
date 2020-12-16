@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 sudo su -
 script logfile1
 yum install httpd php php-mysql php-gd php-xml mariadb-server mariadb php-mbstring -y
